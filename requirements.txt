@@ -1,0 +1,10 @@
+mlflow
+torch
+numpy
+panda
+cat <<EOF > requirements.txt
+mlflow
+torch
+numpy
+pandas
+

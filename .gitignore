@@ -1,0 +1,7 @@
+mlruns/
+mlops-env/
+venv/
+__pycache__/
+*.pth
+*.bin
+.DS_Store
