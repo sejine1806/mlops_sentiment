@@ -1,0 +1,32 @@
+services:
+  trainer:
+    build:
+      context: .
+      dockerfile: docker/training.Dockerfile
+    volumes:
+#      - ./mlruns:/app/mlruns
+       - .:/app
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/inference.Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - trainer
+    volumes:
+     # - ./mlruns:/app/mlruns
+       - .:/app
+
+  ui:
+    build:
+      context: .
+      dockerfile: docker/inference.Dockerfile
+    ports:
+      - "8501:8501"
+    command: streamlit run src/app_ui.py --server.port=8501 --server.address=0.0.0.0
+    volumes:
+      - .:/app
+    depends_on:
+      - api

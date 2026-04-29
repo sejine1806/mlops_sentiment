@@ -1,4 +1,9 @@
-mlflow
 torch
-numpy
-pandas
+fastapi
+uvicorn
+pydantic
+mlflow
+datasets
+transformers
+streamlit
+requests

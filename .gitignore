@@ -1,4 +1,5 @@
 mlruns/
+src/mamba_weights.pt
 mlops-env/
 venv/
 __pycache__/
