@@ -13,7 +13,9 @@ def train():
     with mlflow.start_run():
         # 1. On augmente un peu la donnée pour de meilleurs résultats
         print("📥 Chargement du dataset IMDB (2000 exemples)...")
-        dataset = load_dataset("imdb", split="train[:5000]")
+       # dataset = load_dataset("imdb", split="train[:5000]")
+        full_dataset = load_dataset("imdb", split="train")
+        dataset = full_dataset.shuffle(seed=42).select(range(5000))
 
         model = MambaSentimentModel(vocab_size=30522, d_model=128)
         optimizer = torch.optim.Adam(model.parameters(), lr=5e-5)
@@ -23,7 +25,7 @@ def train():
         model.train()
         
         # 2. Boucle sur 10 époques
-        for epoch in range(3):
+        for epoch in range(5):
             epoch_loss = 0
             # 3. On parcourt TOUT le dataset (pas juste 10 lignes)
             for i in range(len(dataset)):

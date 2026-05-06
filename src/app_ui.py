@@ -3,11 +3,11 @@ import requests
 
 st.set_page_config(page_title="Mamba Sentiment Analyzer", page_icon="🐍")
 st.title("🐍 Mamba Sentiment Analysis")
-st.write("Cette interface interroge ton API FastAPI tournant dans Docker.")
+st.write("This interface queries your FastAPI running in Docker.")
 
-text_input = st.text_area("Entrez une critique de film :", "I loved this movie, the acting was great!")
+text_input = st.text_area("Submit a movie review :", "I loved this movie, the acting was great!")
 
-if st.button("Analyser le sentiment"):
+if st.button("Analyze sentiment"):
     payload = {"text": text_input}
     try:
         response = requests.post("http://api:8000/predict", json=payload)
@@ -19,9 +19,9 @@ if st.button("Analyser le sentiment"):
         with col2:
             st.metric("Confiance", data["confidence"])
             
-        if data["sentiment"] == "Positif":
-            st.success("L'IA pense que c'est un avis positif !")
+        if data["sentiment"] == "Positiv":
+            st.success("Positiv review !")
         else:
-            st.error("L'IA pense que c'est un avis négatif !")
+            st.error("Negativ review !")
     except Exception as e:
-        st.error(f"Erreur de connexion à l'API : {e}")
+        st.error(f"Connection error to the API : {e}")

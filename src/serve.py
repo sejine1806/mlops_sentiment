@@ -32,7 +32,7 @@ class TextRequest(BaseModel):
 @app.post("/predict")
 async def predict(request: TextRequest):
     # On transforme TON texte avec le tokenizer
-    inputs = tokenizer(request.text, return_tensors="pt", padding='max_length', truncation=True, max_length=50)
+    inputs = tokenizer(request.text, return_tensors="pt", padding='max_length', truncation=True, max_length=64)
     
     with torch.no_grad():
         output = model(inputs['input_ids'])
@@ -41,7 +41,7 @@ async def predict(request: TextRequest):
     
     return {
         "text": request.text,
-        "sentiment": "Positif" if pred == 1 else "Négatif",
+        "sentiment": "Positiv" if pred == 1 else "Negativ",
         "confidence": f"{torch.max(prob).item():.2%}"
     }
 
